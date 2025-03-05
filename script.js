@@ -13,6 +13,13 @@ async function ativarWakeLock() {
         }
     } else {
         console.error("Wake Lock API não suportada pelo navegador.");
+        // Fallback: Reproduzir vídeo invisível
+        const video = document.getElementById('keepAwakeVideo');
+        if (video) {
+            video.play().catch(error => {
+                console.error("Erro ao reproduzir vídeo:", error);
+            });
+        }
     }
 }
 
