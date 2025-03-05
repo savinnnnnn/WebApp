@@ -22,6 +22,12 @@ function atualizarChat() {
     chatFrame.src = chatUrl;
 }
 
+function atualizarPixGG() {
+    const pixggUrl = document.getElementById('pixggUrl').value;
+    const pixggFrame = document.getElementById('pixggFrame');
+    pixggFrame.src = pixggUrl;
+}
+
 function togglePasswordVisibility(inputId) {
     const input = document.getElementById(inputId);
     if (input.type === "password") {
