@@ -1,14 +1,18 @@
 let wakeLock = null;
 
 async function ativarWakeLock() {
-    try {
-        wakeLock = await navigator.wakeLock.request("screen");
-        wakeLock.addEventListener("release", () => {
-            console.log("Wake Lock liberado");
-        });
-        console.log("Wake Lock ativado");
-    } catch (err) {
-        console.error("Erro ao ativar Wake Lock:", err);
+    if ('wakeLock' in navigator) {
+        try {
+            wakeLock = await navigator.wakeLock.request("screen");
+            wakeLock.addEventListener("release", () => {
+                console.log("Wake Lock liberado");
+            });
+            console.log("Wake Lock ativado");
+        } catch (err) {
+            console.error("Erro ao ativar Wake Lock:", err);
+        }
+    } else {
+        console.error("Wake Lock API não suportada pelo navegador.");
     }
 }
 
@@ -16,12 +20,6 @@ function atualizarChat() {
     const chatUrl = document.getElementById('chatUrl').value;
     const chatFrame = document.getElementById('chatFrame');
     chatFrame.src = chatUrl;
-}
-
-function atualizarPixGG() {
-    const pixggUrl = document.getElementById('pixggUrl').value;
-    const pixggFrame = document.getElementById('pixggFrame');
-    pixggFrame.src = pixggUrl;
 }
 
 function togglePasswordVisibility(inputId) {
